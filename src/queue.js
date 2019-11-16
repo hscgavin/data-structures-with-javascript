@@ -24,3 +24,15 @@ class Queue {
     }, '');
   }
 }
+
+// example
+
+const q = new Queue();
+q.enqueue('Apple');
+q.enqueue('Banana');
+q.enqueue('Watermelon');
+console.log(q.front());
+console.log(q.back());
+console.log(q.toString());
+q.dequeue();
+console.log(q.front());

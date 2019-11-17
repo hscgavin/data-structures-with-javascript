@@ -37,7 +37,7 @@ class LinkedList {
     previous.next = newNode;
     return this.head;
   }
-  insertAtEnd() {
+  insertAtEnd(data) {
     const newNode = new Node(data);
     // when the list is empty
     if (!this.head) {
@@ -106,4 +106,34 @@ class LinkedList {
     previous.next = previous.next.next;
     return this.head;
   }
+  // for printing
+  display() {
+    if (!this.head) {
+      console.log('LinkedList is empty');
+    } else {
+      console.log(this.head.data);
+    }
+    var currNode = this.head;
+    while (currNode.next !== null) {
+      console.log(currNode.next.data);
+      currNode = currNode.next;
+    }
+  }
 }
+
+// example
+
+const llist = new LinkedList();
+llist.insertAtBeginning('A');
+llist.insertAt('B', 1);
+llist.insertAt('C', 2);
+llist.display();
+llist.insertAtEnd('D');
+llist.display();
+llist.deleteFirst();
+llist.display();
+console.log(llist.getAt(2));
+llist.insertAt(1, '1');
+llist.display();
+llist.deleteAt(1);
+llist.display();

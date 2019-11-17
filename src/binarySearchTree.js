@@ -17,23 +17,44 @@ class BinarySearchTree {
       this.root = newNode;
       return;
     }
+    this.insertNode(this.root, newNode);
 
-    let current = this.root;
-    let parent;
-    while (true) {
-      parent = current;
-      if (data < current.data) {
-        current = current.left;
-        if (current === null) {
-          parent.left = newNode;
-          break;
-        }
+    /**
+     *  refactor out to use recursion
+     */
+
+    // let current = this.root;
+    // let parent;
+    // while (true) {
+    //   parent = current;
+    //   if (data < current.data) {
+    //     current = current.left;
+    //     if (current === null) {
+    //       parent.left = newNode;
+    //       break;
+    //     }
+    //   } else {
+    //     current = current.right;
+    //     if (current === null) {
+    //       parent.right = newNode;
+    //       break;
+    //     }
+    //   }
+    // }
+  }
+
+  insertNode(node, newNode) {
+    if (newNode.data < node.data) {
+      if (node.left === null) {
+        node.left = newNode;
       } else {
-        current = current.right;
-        if (current === null) {
-          parent.right = newNode;
-          break;
-        }
+        this.insertNode(node.left);
+      }
+    } else {
+      if (node.right === null) {
+        node.right = newNode;
+      } else {
+        this.insertNode(node.right, newNode);
       }
     }
   }

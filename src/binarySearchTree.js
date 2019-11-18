@@ -58,6 +58,71 @@ class BinarySearchTree {
       }
     }
   }
+
+  remove(data) {
+    // root is re-initialized with
+    // root of a modified tree.
+    this.root = this.removeNode(this.root, data);
+  }
+
+  removeNode(node, data) {
+    // if the root is null then tree is empty
+    if (node === null) return null;
+    else if (data < node.data) {
+      node.left = this.removeNode(node.left, data);
+      return node;
+    }
+
+    // if data to be delete is greater than
+    // roots data then move to right subtree
+    else if (data > node.data) {
+      node.right = this.removeNode(node.right, data);
+      return node;
+    } else {
+      // deleting node with no children
+      if (node.left === null && node.right === null) {
+        node = null;
+        return node;
+      }
+
+      // deleting node with one children
+      if (node.left === null) {
+        node = node.right;
+        return node;
+      } else if (node.right === null) {
+        node = node.left;
+        return node;
+      }
+
+      // Deleting node with two children
+      var aux = this.findMinNode(node.right);
+      node.data = aux.data;
+
+      node.right = this.removeNode(node.right, aux.data);
+      return node;
+    }
+  }
+  findMinNode(node) {
+    if (node.left === null) {
+      return node;
+    }
+    this.findMinNode(node.left);
+  }
+
+  search(node, data) {
+    if (node === null) {
+      return null;
+    }
+    if (data < node.data) {
+      return this.search(node.left, data);
+    }
+    if (data > node.data) {
+      return this.search(node.right, data);
+    }
+    // found, return node
+    return node;
+  }
+
   // Traverse the left subtree i.e perform inorder on left subtree
   // Visit the root
   // Traverse the right subtree i.e perform inorder on right subtree

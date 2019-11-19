@@ -133,7 +133,7 @@ llist.display();
 llist.deleteFirst();
 llist.display();
 console.log(llist.getAt(2));
-llist.insertAt(1, '1');
+llist.insertAt('foo', 1);
 llist.display();
 llist.deleteAt(1);
 llist.display();

@@ -48,7 +48,7 @@ class BinarySearchTree {
       if (node.left === null) {
         node.left = newNode;
       } else {
-        this.insertNode(node.left);
+        this.insertNode(node.left, newNode);
       }
     } else {
       if (node.right === null) {
@@ -86,7 +86,7 @@ class BinarySearchTree {
       }
 
       // deleting node with one children
-      if (node.left === null) {
+      else if (node.left === null) {
         node = node.right;
         return node;
       } else if (node.right === null) {
@@ -95,7 +95,7 @@ class BinarySearchTree {
       }
 
       // Deleting node with two children
-      var aux = this.findMinNode(node.right);
+      const aux = this.findMinNode(node.right);
       node.data = aux.data;
 
       node.right = this.removeNode(node.right, aux.data);
@@ -106,7 +106,7 @@ class BinarySearchTree {
     if (node.left === null) {
       return node;
     }
-    this.findMinNode(node.left);
+    return this.findMinNode(node.left);
   }
 
   search(node, data) {
@@ -133,4 +133,40 @@ class BinarySearchTree {
       this.inOrder(node.right);
     }
   }
+  postOrder(node) {
+    if (node != null) {
+      this.postOrder(node.left);
+      this.postOrder(node.right);
+      console.log(node.data);
+    }
+  }
+  preOrder(node) {
+    if (node != null) {
+      console.log(node.data);
+      this.preOrder(node.left);
+      this.preOrder(node.right);
+    }
+  }
+  getRootNode() {
+    return this.root;
+  }
 }
+
+// example
+const bst = new BinarySearchTree();
+bst.insert(14);
+bst.insert(27);
+bst.insert(11);
+bst.insert(7);
+bst.insert(21);
+bst.insert(16);
+bst.insert(12);
+bst.insert(3);
+bst.insert(8);
+bst.insert(29);
+bst.inOrder(bst.getRootNode());
+
+// Removing node with no children
+bst.remove(8);
+
+bst.inOrder(bst.getRootNode());
